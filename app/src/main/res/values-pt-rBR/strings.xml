@@ -30,4 +30,12 @@
     <string name="radio_low">Baixo</string>
     <string name="dialog_finish">Terminar</string>
     <string name="dialog_cancel">Cancelar</string>
+    <string name="action_settings">Definições</string>
+    <string name="disconnected">Desconectado</string>
+    <string name="product_information">Informação do produto</string>
+    <string name="connection_loose">Status: Nenhum Produto Conectado</string>
+    <string name="sdk_version">Versão do DJI SDK: %1$s</string>
+    <string name="status_no_product_connected">Status: Nenhum Produto Conectado</string>
+    <string name="btn_open">Abrir</string>
+    <string name="title_connection">Aplicativo de Mapeamento</string>
 </resources>
