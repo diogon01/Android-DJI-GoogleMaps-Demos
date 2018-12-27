@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import dji.sdk.sdkmanager.DJISDKManager;
+
 public class ConnectionActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = ConnectionActivity.class.getName();
@@ -56,6 +58,14 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
 
     private void initUI() {
         mTextConnectionStatus = (TextView) findViewById(R.id.text_connection_status);
+        mTextProduct = (TextView) findViewById(R.id.text_product_info);
+
+        mVersionTv = (TextView) findViewById(R.id.textView2);
+        mVersionTv.setText(getResources().getString(R.string.sdk_version, DJISDKManager.getInstance().getSDKVersion()));
+
+        mBtnOpen = (Button) findViewById(R.id.btn_open);
+        mBtnOpen.setOnClickListener(this);
+        mBtnOpen.setEnabled(false);
     }
 
     @Override
