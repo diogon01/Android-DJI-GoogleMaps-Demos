@@ -27,4 +27,6 @@
     <string name="radio_mid">Mid</string>
     <string name="radio_high">High</string>
     <string name="label_action_after_finished">Action After Finished:</string>
+    <string name="dialog_finish">Finish</string>
+    <string name="dialog_cancel">Cancel</string>
 </resources>

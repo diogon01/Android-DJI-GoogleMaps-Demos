@@ -28,4 +28,6 @@
     <string name="radio_gohome">Ir para casa</string>
     <string name="radio_auto">Automático</string>
     <string name="radio_low">Baixo</string>
+    <string name="dialog_finish">Terminar</string>
+    <string name="dialog_cancel">Cancelar</string>
 </resources>
