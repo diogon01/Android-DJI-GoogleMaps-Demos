@@ -11,4 +11,20 @@
     <string name="btn_start">Start</string>
     <string name="btn_stop">Stop</string>
     <string name="main_title">Google Maps  Demo</string>
+    <string name="tilte_waypoint_configuration">Waypoint Configuration</string>
+    <string name="label_altitude">Altitude:</string>
+    <string name="label_speed">Speed:</string>
+    <string name="radio_none">None</string>
+    <string name="radio_gohome">GoHome</string>
+    <string name="radio_autoland">AutoLand</string>
+    <string name="radio_backto_1st">BackTo 1st</string>
+    <string name="label_heading">Heading:</string>
+    <string name="radio_auto">Auto</string>
+    <string name="btn_initial">Initial</string>
+    <string name="radio_rc_control">RC Control</string>
+    <string name="radio_use_waypoint">Use Waypoint</string>
+    <string name="radio_low">Low</string>
+    <string name="radio_mid">Mid</string>
+    <string name="radio_high">High</string>
+    <string name="label_action_after_finished">Action After Finished:</string>
 </resources>

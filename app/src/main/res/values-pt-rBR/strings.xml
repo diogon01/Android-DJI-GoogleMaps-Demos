@@ -12,4 +12,20 @@
     <string name="btn_start">Iniciar</string>
     <string name="btn_stop">Parar</string>
     <string name="main_title">Missão de Voo  DJI</string>
+    <string name="tilte_waypoint_configuration">Configuração de Waypoint</string>
+    <string name="label_altitude">Altitude:</string>
+    <string name="label_speed">Velocidade:</string>
+    <string name="radio_none">Nenhum</string>
+    <string name="radio_autoland">AutoLand*</string>
+    <string name="radio_backto_1st">Voltar para o 1º</string>
+    <string name="label_heading">Tipo:</string>
+    <string name="btn_initial">Inicial</string>
+    <string name="radio_rc_control">Controle RC</string>
+    <string name="radio_use_waypoint">Use Waypoint</string>
+    <string name="radio_mid">Medio</string>
+    <string name="radio_high">Alto</string>
+    <string name="label_action_after_finished">Ação após finalizado:</string>
+    <string name="radio_gohome">Ir para casa</string>
+    <string name="radio_auto">Automático</string>
+    <string name="radio_low">Baixo</string>
 </resources>

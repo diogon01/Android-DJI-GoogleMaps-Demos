@@ -53,10 +53,10 @@
 
         <meta-data
             android:name="com.dji.sdk.API_KEY"
-            android:value="sua chave dji" />
+            android:value="d3646208d47681aa03f4f83e" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="sua chave android" />
+            android:value="AIzaSyDnG5uU0Nu753-pbOpEgXaUqvOhjebKasM" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -76,11 +76,12 @@
         <service android:name="dji.sdk.sdkmanager.DJIGlobalService"></service>
 
         <!-- DJI SDK -->
-
-
-
-
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_demo"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
