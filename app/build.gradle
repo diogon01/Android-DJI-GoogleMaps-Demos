@@ -1,16 +1,26 @@
+//Aplica plugin 'android' de compilaçao do codigo
 apply plugin: 'com.android.application'
-
+// Esse elemento configura os parametros de compilação do código
 android {
+    // API Level usada para compilar o código(deve sempre ser a ultima)
     compileSdkVersion 28
+    // Este elemento configura os itens do AndroidManifest.xml
     defaultConfig {
+        // Pacote do projeto o identificador único
         applicationId "googlemap.gsdemo.agro42.com.gsdemo"
+        // API Level min do projeo
         minSdkVersion 19
+        // Api Level max utilizada para otimizar o build na compilação do código
         targetSdkVersion 28
+        // Código para identificar o aplicativo na Google Play
         versionCode 1
+        // Versão do código com formato Amigável usuário
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        // Ativando o suporte multidirecional.
+        multiDexEnabled true
     }
-    packagingOptions{
+    packagingOptions {
         doNotStrip "*/*/libdjivideo.so"
         doNotStrip "*/*/libSDKRelativeJNI.so"
         doNotStrip "*/*/libFlyForbid.so"
@@ -23,15 +33,19 @@ android {
         exclude 'META-INF/rxjava.properties'
     }
 }
-
+// Declara as dependências (bibliotecas) para compilar o projeto
 dependencies {
+    // Inclui todos os arquivos .jar da pasta libs na compilação
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    // Biblioteca implementation DJI MobileSDK 4.8.1
     implementation 'com.dji:dji-sdk:4.8.1'
+    // Biblioteca compileOnly DJI MobileSDK 4.8.1
     compileOnly 'com.dji:dji-sdk-provided:4.8.1'
+    // Biblioteca do Play Service Maps
     implementation 'com.google.android.gms:play-services-maps:12.0.0'
 }
