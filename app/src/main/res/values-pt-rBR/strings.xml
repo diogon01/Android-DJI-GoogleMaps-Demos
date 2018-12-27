@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DRONE42</string>
+    <string name="title_activity_demo">GSDemoActivity</string>
+    <string name="google_app_id">Google_App_ID_String</string>
+    <string name="btn_save">Salvar</string>
+    <string name="btn_locate">Local</string>
+    <string name="btn_add">Adicionar</string>
+    <string name="btn_clear">Limpar</string>
+    <string name="btn_config">Configuração</string>
+    <string name="btn_upload">Upload</string>
+    <string name="btn_start">Iniciar</string>
+    <string name="btn_stop">Parar</string>
+    <string name="main_title">Missão de Voo  DJI</string>
+</resources>

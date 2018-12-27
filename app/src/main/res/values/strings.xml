@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">GSDemo</string>
+    <string name="app_name">DRONE42</string>
+    <string name="title_activity_demo">GSDemoActivity</string>
+    <string name="google_app_id">Google_App_ID_String</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_locate">Locate</string>
+    <string name="btn_add">Add</string>
+    <string name="btn_clear">Clear</string>
+    <string name="btn_config">Config</string>
+    <string name="btn_upload">Upload</string>
+    <string name="btn_start">Start</string>
+    <string name="btn_stop">Stop</string>
+    <string name="main_title">Google Maps  Demo</string>
 </resources>
