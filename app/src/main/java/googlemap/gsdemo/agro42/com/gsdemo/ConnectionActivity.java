@@ -2,7 +2,10 @@ package googlemap.gsdemo.agro42.com.gsdemo;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -27,6 +30,7 @@ import dji.common.error.DJISDKError;
 import dji.log.DJILog;
 import dji.sdk.base.BaseComponent;
 import dji.sdk.base.BaseProduct;
+import dji.sdk.products.Aircraft;
 import dji.sdk.sdkmanager.DJISDKManager;
 
 public class ConnectionActivity extends Activity implements View.OnClickListener {
@@ -56,8 +60,7 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
     };
 
     private List<String> missingPermission = new ArrayList<>();
-    private AtomicBoolean isRegistrationInProgress = new AtomicBoolean();
-
+    private AtomicBoolean isRegistrationInProgress = new AtomicBoolean(false);
     private static final int REQUEST_PERMISSION_CODE = 12345;
 
     @Override
@@ -65,7 +68,13 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         checkAndRequestPermissions();
         setContentView(R.layout.activity_connection);
+
         initUI();
+
+        // Registre o receptor de broadcast para receber as alterações da conexão do dispositivo.
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(DJIDemoApplication.FLAG_CONNECTION_CHANGE);
+        registerReceiver(mReceiver, filter);
     }
 
     /**
@@ -108,8 +117,9 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
         // If there is enough permission, we will start the registration
         if (missingPermission.isEmpty()) {
             startSDKRegistration();
+        } else {
+            showToast("Missing permissions!!!");
         }
-
 
     }
 
@@ -136,20 +146,23 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
                         public void onProductDisconnect() {
                             Log.d(TAG, "onProductDisconnect");
                             showToast("Product Disconnected");
+
                         }
 
                         @Override
                         public void onProductConnect(BaseProduct baseProduct) {
                             Log.d(TAG, String.format("onProductConnect newProduct:%s", baseProduct));
                             showToast("Product Connected");
+
                         }
 
                         @Override
-                        public void onComponentChange(BaseProduct.ComponentKey componentKey,
-                                                      BaseComponent oldComponent,
+                        public void onComponentChange(BaseProduct.ComponentKey componentKey, BaseComponent oldComponent,
                                                       BaseComponent newComponent) {
+
                             if (newComponent != null) {
                                 newComponent.setComponentListener(new BaseComponent.ComponentListener() {
+
                                     @Override
                                     public void onConnectivityChange(boolean isConnected) {
                                         Log.d(TAG, "onComponentConnectivityChanged: " + isConnected);
@@ -157,11 +170,11 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
                                 });
                             }
                             Log.d(TAG,
-                                    String.format("onComponentChange key:%s, oldComponent:%s, " +
-                                                    "newComponent:%s",
+                                    String.format("onComponentChange key:%s, oldComponent:%s, newComponent:%s",
                                             componentKey,
                                             oldComponent,
                                             newComponent));
+
                         }
                     });
                 }
@@ -195,24 +208,67 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
     @Override
     protected void onDestroy() {
         Log.e(TAG, "onDestroy");
+        unregisterReceiver(mReceiver);
         super.onDestroy();
     }
+
 
     private void initUI() {
         mTextConnectionStatus = (TextView) findViewById(R.id.text_connection_status);
         mTextProduct = (TextView) findViewById(R.id.text_product_info);
-
-        mVersionTv = (TextView) findViewById(R.id.textView2);
-        mVersionTv.setText(getResources().getString(R.string.sdk_version, DJISDKManager.getInstance().getSDKVersion()));
-
         mBtnOpen = (Button) findViewById(R.id.btn_open);
         mBtnOpen.setOnClickListener(this);
         mBtnOpen.setEnabled(false);
+
+        mVersionTv = (TextView) findViewById(R.id.textView2);
+        mVersionTv.setText(getResources().getString(R.string.sdk_version, DJISDKManager.getInstance().getSDKVersion()));
+    }
+
+
+    protected BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            refreshSDKRelativeUI();
+        }
+    };
+
+    private void refreshSDKRelativeUI() {
+        BaseProduct mProduct = DJIDemoApplication.getProductInstance();
+
+        if (null != mProduct && mProduct.isConnected()) {
+            Log.v(TAG, "refreshSDK: True");
+            mBtnOpen.setEnabled(true);
+
+            String str = mProduct instanceof Aircraft ? "DJIAircraft" : "DJIHandHeld";
+            mTextConnectionStatus.setText("Status: " + str + " connected");
+
+            if (null != mProduct.getModel()) {
+                mTextProduct.setText("" + mProduct.getModel().getDisplayName());
+            } else {
+                mTextProduct.setText(R.string.product_information);
+            }
+
+        } else {
+            Log.v(TAG, "refreshSDK: False");
+            mBtnOpen.setEnabled(false);
+
+            mTextProduct.setText(R.string.product_information);
+            mTextConnectionStatus.setText(R.string.connection_loose);
+        }
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View v) {
+        switch (v.getId()) {
 
+            case R.id.btn_open: {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                break;
+            }
+            default:
+                break;
+        }
     }
 
     private void showToast(final String toastMsg) {
@@ -220,7 +276,9 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
             @Override
             public void run() {
                 Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_LONG).show();
+
             }
         });
     }
+
 }
