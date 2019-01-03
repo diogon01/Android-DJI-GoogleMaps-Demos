@@ -67,7 +67,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private boolean isAdd = false;
 
-    private double droneLocationLat = 181, droneLocationLng = 181;
+    private double droneLocationLat = -27.571857, droneLocationLng = -48.6062657;
     private final Map<Integer, Marker> mMarkers = new ConcurrentHashMap<Integer, Marker>();
     private Marker droneMarker = null;
 
@@ -579,7 +579,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             setUpMap();
         }
 
-        LatLng shenzhen = new LatLng(22.5362, 113.9454);
+        LatLng shenzhen = new LatLng(-27.571857, -48.6062657);
         gMap.addMarker(new MarkerOptions().position(shenzhen).title("Marker in Shenzhen"));
         gMap.moveCamera(CameraUpdateFactory.newLatLng(shenzhen));
     }
