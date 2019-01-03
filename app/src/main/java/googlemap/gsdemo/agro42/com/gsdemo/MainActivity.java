@@ -61,6 +61,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     protected static final String TAG = "GSDemoActivity";
 
     private GoogleMap gMap;
+
     private Button locate, add, clear;
     private Button config, upload, start, stop;
 
@@ -80,6 +81,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private WaypointMissionOperator instance;
     private WaypointMissionFinishedAction mFinishedAction = WaypointMissionFinishedAction.NO_ACTION;
     private WaypointMissionHeadingMode mHeadingMode = WaypointMissionHeadingMode.AUTO;
+
 
 
     @Override
@@ -144,23 +146,31 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         // SDK funciona bem.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.VIBRATE,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.VIBRATE,
                             Manifest.permission.INTERNET, Manifest.permission.ACCESS_WIFI_STATE,
                             Manifest.permission.WAKE_LOCK, Manifest.permission.ACCESS_COARSE_LOCATION,
                             Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.CHANGE_WIFI_STATE, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
                             Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.SYSTEM_ALERT_WINDOW,
                             Manifest.permission.READ_PHONE_STATE,
-
-                    }, 1);
+                    }
+                    , 1);
         }
 
         setContentView(R.layout.activity_main);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(DJIDemoApplication.FLAG_CONNECTION_CHANGE);
+        registerReceiver(mReceiver, filter);
+
         initUI();
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        addListener();
+
     }
 
     protected BroadcastReceiver mReceiver = new BroadcastReceiver() {
