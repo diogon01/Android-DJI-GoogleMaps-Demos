@@ -83,7 +83,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private WaypointMissionHeadingMode mHeadingMode = WaypointMissionHeadingMode.AUTO;
 
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -260,7 +259,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         @Override
         public void onExecutionFinish(@Nullable final DJIError error) {
-            setResultToToast("Execution finished: " + (error == null ? "Success!" : error.getDescription()));
+            setResultToToast(R.string.executation_finished + ": " +
+                    (error == null ? R.string.successfully + "!" : error.getDescription()));
         }
     };
 
@@ -294,7 +294,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 waypointMissionBuilder.waypointList(waypointList).waypointCount(waypointList.size());
             }
         } else {
-            setResultToToast("Cannot Add Waypoint");
+            setResultToToast("" + R.string.add_waypoint_cannot);
         }
     }
 
@@ -310,7 +310,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         // Cria o objeto MarkerOptions
         final MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(pos);
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.drone2));
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.drone3));
 
         runOnUiThread(new Runnable() {
             @Override
@@ -523,14 +523,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 waypointMissionBuilder.getWaypointList().get(i).altitude = altitude;
             }
 
-            setResultToToast("Set Waypoint attitude successfully");
+            setResultToToast("" + R.string.set_way_point_successfully);
         }
 
         DJIError error = getWaypointMissionOperator().loadMission(waypointMissionBuilder.build());
         if (error == null) {
-            setResultToToast("loadWaypoint succeeded");
+            setResultToToast("" + R.string.load_waypoint_succeeded);
         } else {
-            setResultToToast("loadWaypoint failed " + error.getDescription());
+            setResultToToast(R.string.load_waypoint_failed + "" + error.getDescription());
         }
     }
 
@@ -540,9 +540,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             @Override
             public void onResult(DJIError error) {
                 if (error == null) {
-                    setResultToToast("Mission upload successfully!");
+                    setResultToToast("" + R.string.mission_upload_successfully);
                 } else {
-                    setResultToToast("Mission upload failed, error: " + error.getDescription() + " retrying...");
+                    setResultToToast(R.string.mission_upload_failed + ": " + error.getDescription()
+                            + R.string.retrying + "...");
                     getWaypointMissionOperator().retryUploadMission(null);
                 }
             }
@@ -555,7 +556,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         getWaypointMissionOperator().startMission(new CommonCallbacks.CompletionCallback() {
             @Override
             public void onResult(DJIError error) {
-                setResultToToast("Mission Start: " + (error == null ? "Successfully" : error.getDescription()));
+                setResultToToast(R.string.mission_start + ": " +
+                        (error == null ? R.string.successfully : error.getDescription()));
             }
         });
     }
@@ -565,7 +567,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         getWaypointMissionOperator().stopMission(new CommonCallbacks.CompletionCallback() {
             @Override
             public void onResult(DJIError error) {
-                setResultToToast("Mission Stop: " + (error == null ? "Successfully" : error.getDescription()));
+                setResultToToast(R.string.mission_stop + ": " +
+                        (error == null ? R.string.successfully : error.getDescription()));
             }
         });
 
@@ -580,7 +583,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
 
         LatLng shenzhen = new LatLng(-27.571857, -48.6062657);
-        gMap.addMarker(new MarkerOptions().position(shenzhen).title("Marker in Shenzhen"));
+        gMap.addMarker(new MarkerOptions().position(shenzhen).title("" + R.string.marker_in));
         gMap.moveCamera(CameraUpdateFactory.newLatLng(shenzhen));
     }
 

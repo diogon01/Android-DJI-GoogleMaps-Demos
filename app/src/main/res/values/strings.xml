@@ -37,5 +37,27 @@
     <string name="status_no_product_connected">Status: No Product Connected</string>
     <string name="btn_open">Open</string>
     <string name="title_connection">App Dji Google</string>
+    <string name="set_way_point_successfully">Set Waypoint attitude successfully</string>
+    <string name="load_waypoint_succeeded">loadWaypoint succeeded</string>
+    <string name="load_waypoint_failed">loadWaypoint failed</string>
+    <string name="mission_upload_successfully">Mission upload successfully</string>
+    <string name="mission_upload_failed">Mission upload failed, error</string>
+    <string name="retrying">retrying</string>
+    <string name="successfully">Successfully</string>
+    <string name="mission_start">Mission Start</string>
+    <string name="mission_stop">Mission Stop</string>
+    <string name="marker_in">Marker in Agro42</string>
+    <string name="register_success">Register Success</string>
+    <string name="register_sdk_fails">Register sdk fails</string>
+    <string name="check_network_available">check network is available</string>
+    <string name="check_permissions_granted">Por favor, verifique se a permissão é concedida.</string>
+    <string name="registering">registering</string>
+    <string name="please_wait">Please Wait</string>
+    <string name="product_disconect">Product Disconnected</string>
+    <string name="product_conected">Product Connected</string>
+    <string name="status">Status</string>
+    <string name="connected">connected</string>
+    <string name="executation_finished">Execution finished</string>
+    <string name="add_waypoint_cannot">Cannot Add Waypoint</string>
 
 </resources>

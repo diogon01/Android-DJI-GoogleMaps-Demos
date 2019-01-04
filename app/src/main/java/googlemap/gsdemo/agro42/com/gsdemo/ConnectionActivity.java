@@ -11,11 +11,9 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -128,16 +126,17 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
-                    showToast("registering, pls wait...");
+                    showToast(R.string.registering + ", " + R.string.please_wait + "...");
                     DJISDKManager.getInstance().registerApp(getApplicationContext(), new DJISDKManager.SDKManagerCallback() {
                         @Override
                         public void onRegister(DJIError djiError) {
                             if (djiError == DJISDKError.REGISTRATION_SUCCESS) {
                                 DJILog.e("App registration", DJISDKError.REGISTRATION_SUCCESS.getDescription());
                                 DJISDKManager.getInstance().startConnectionToProduct();
-                                showToast("Register Success");
+                                showToast("" + R.string.register_success);
                             } else {
-                                showToast("Register sdk fails, check network is available");
+                                showToast(R.string.register_sdk_fails + ", "
+                                        + R.string.check_network_available);
                             }
                             Log.v(TAG, djiError.getDescription());
                         }
@@ -145,14 +144,14 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
                         @Override
                         public void onProductDisconnect() {
                             Log.d(TAG, "onProductDisconnect");
-                            showToast("Product Disconnected");
+                            showToast("" + R.string.product_disconect);
 
                         }
 
                         @Override
                         public void onProductConnect(BaseProduct baseProduct) {
                             Log.d(TAG, String.format("onProductConnect newProduct:%s", baseProduct));
-                            showToast("Product Connected");
+                            showToast("" + R.string.product_conected);
 
                         }
 
@@ -240,7 +239,7 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
             mBtnOpen.setEnabled(true);
 
             String str = mProduct instanceof Aircraft ? "DJIAircraft" : "DJIHandHeld";
-            mTextConnectionStatus.setText("Status: " + str + " connected");
+            mTextConnectionStatus.setText(R.string.status + ": " + str + " " + R.string.connected);
 
             if (null != mProduct.getModel()) {
                 mTextProduct.setText("" + mProduct.getModel().getDisplayName());

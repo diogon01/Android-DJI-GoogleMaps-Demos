@@ -38,4 +38,26 @@
     <string name="status_no_product_connected">Status: Nenhum Produto Conectado</string>
     <string name="btn_open">Abrir</string>
     <string name="title_connection">Aplicativo de Mapeamento</string>
+    <string name="set_way_point_successfully">Definir a atitude do Waypoint com sucesso</string>
+    <string name="load_waypoint_succeeded">Carregado o Waypoint com sucesso!</string>
+    <string name="load_waypoint_failed">Falha ao carregar o Waypoint</string>
+    <string name="mission_upload_successfully">Upload da Missão com sucesso</string>
+    <string name="mission_upload_failed">O upload da missão falhou, erro</string>
+    <string name="retrying">tentando novamente</string>
+    <string name="successfully">Com sucesso</string>
+    <string name="mission_start">Início da Missão</string>
+    <string name="mission_stop">Parar Missão</string>
+    <string name="marker_in">Marcado no Agro42</string>
+    <string name="register_success">Registrado com Sucesso</string>
+    <string name="register_sdk_fails">Falha ao registar o MobileSDK</string>
+    <string name="check_network_available">verifique sua conexao com a internet</string>
+    <string name="check_permissions_granted">Por favor, verifique se a permissão é concedida.</string>
+    <string name="registering">registrando</string>
+    <string name="please_wait">Aguarde por favor</string>
+    <string name="product_disconect">Produto disconectado</string>
+    <string name="product_conected">Produto conectado</string>
+    <string name="connected">conectado</string>
+    <string name="status">Status</string>
+    <string name="executation_finished">Execução finalizada</string>
+    <string name="add_waypoint_cannot">Não é possível adicionar o ponto de passagem</string>
 </resources>

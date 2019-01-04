@@ -65,29 +65,31 @@ public class DJIDemoApplication extends Application {
             @Override
             public void onRegister(DJIError error) {
 
-                if(error == DJISDKError.REGISTRATION_SUCCESS) {
+                if (error == DJISDKError.REGISTRATION_SUCCESS) {
 
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "Register Success", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), R.string.register_success,
+                                    Toast.LENGTH_LONG).show();
                         }
                     });
 
                     DJISDKManager.getInstance().startConnectionToProduct();
 
                 } else {
-
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
 
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "Register sdk fails, check network is available", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),
+                                    R.string.register_sdk_fails + ", " +
+                                            R.string.check_network_available,
+                                    Toast.LENGTH_LONG).show();
                         }
                     });
-
                 }
                 Log.e("TAG", error.toString());
             }
@@ -97,12 +99,14 @@ public class DJIDemoApplication extends Application {
                 Log.d("TAG", "onProductDisconnect");
                 notifyStatusChange();
             }
+
             @Override
             public void onProductConnect(BaseProduct baseProduct) {
                 Log.d("TAG", String.format("onProductConnect newProduct:%s", baseProduct));
                 notifyStatusChange();
 
             }
+
             @Override
             public void onComponentChange(BaseProduct.ComponentKey componentKey, BaseComponent oldComponent,
                                           BaseComponent newComponent) {
@@ -131,15 +135,19 @@ public class DJIDemoApplication extends Application {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || (permissionCheck == 0 && permissionCheck2 == 0)) {
             //This is used to start SDK services and initiate SDK.
             DJISDKManager.getInstance().registerApp(getApplicationContext(), mDJISDKManagerCallback);
-            Toast.makeText(getApplicationContext(), "registering, pls wait...", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),
+                    R.string.registering + ", "
+                            + R.string.please_wait + "...",
+                    Toast.LENGTH_LONG).show();
 
         } else {
-            Toast.makeText(getApplicationContext(), "Please check if the permission is granted.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),
+                    R.string.check_permissions_granted, Toast.LENGTH_LONG).show();
         }
 
     }
 
-    protected void attachBaseContext(Context base){
+    protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
